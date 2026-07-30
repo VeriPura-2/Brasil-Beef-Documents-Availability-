@@ -352,8 +352,8 @@ const ROLES = {
   veripura:  { label:"VeriPura — superadmin (all parties)", org:"VeriPura", scope:"Everything, across every party — the operator view for the demo.", showCommercial:true, showAllParties:true },
   importer:  { label:"Importer — Emma, Nordic Frozen Foods Ltd", org:"Emma", scope:"Your inbound consignments to the United Kingdom, full document detail.", showCommercial:true, filterParty:"importer" },
   exporter:  { label:"Exporter — Felix, Amazon Export Ltda", org:"Felix", scope:"Your outbound consignments, grouped by importer. GB-side steps are read-only.", showCommercial:true, filterParty:"exporter", readOnlyDest:true },
-  forwarder: { label:"International freight forwarder — Gavin Johnson", org:"Gavin", scope:"Warehouse pickup through GB arrival. No commercial value or payment terms.", showCommercial:false, focus:"logistics" },
-  customs:   { label:"Customs agent — George Baker", org:"George", scope:"CDS declaration status and MRN references. No commercial value.", showCommercial:false, focus:"customs" },
+  forwarder: { label:"International freight forwarder — Gavin Johnson (via TWIN)", org:"Gavin", scope:"Preview of the warehouse-to-GB-arrival logistics and document-readiness data VeriPura relays to TWIN for Gavin's own systems — Freight Forwarder does not log into VeriPura directly. No commercial value or payment terms.", showCommercial:false, focus:"logistics", noLogin:true },
+  customs:   { label:"Customs agent — George Baker (via TWIN)", org:"George", scope:"Preview of the CDS declaration status and MRN references VeriPura relays to TWIN for George's own systems — Customs Agent does not log into VeriPura directly. No commercial value.", showCommercial:false, focus:"customs", noLogin:true },
   vessel:    { label:"Vessel operator — MSC (via TWIN)", org:"MSC", scope:"Preview of the booking, ENS, and manifest data exchanged with MSC via TWIN — Vessel Operator does not log into VeriPura directly.", showCommercial:false, focus:"vessel", noLogin:true },
   finance:   { label:"Trade finance — ML (via TWIN)", org:"ML", scope:"Preview of the document-completeness and payment-trigger signals VeriPura relays to ML via TWIN — Trade Finance does not log into VeriPura directly.", showCommercial:true, focus:"finance", noLogin:true },
   pha:       { label:"Port Health Authority — Southampton BCP (via TWIN)", org:"Southampton PHA", scope:"Preview of the document status and alerts VeriPura relays to TWIN for Southampton BCP's own systems — Port Health Authority does not log into VeriPura directly. Commercial value and payment terms hidden.", showCommercial:false, focus:"pha", noLogin:true }
@@ -571,8 +571,8 @@ function render(){
 
   document.getElementById('list-title').textContent =
     currentRole==="exporter" ? "Your shipments, by importer" :
-    currentRole==="forwarder" ? "Shipments, warehouse to GB arrival" :
-    currentRole==="customs" ? "CDS declarations" :
+    currentRole==="forwarder" ? "Shipments, warehouse to GB arrival — via TWIN" :
+    currentRole==="customs" ? "CDS declarations — via TWIN" :
     currentRole==="vessel" ? "Bookings — via TWIN" :
     currentRole==="finance" ? "Payment instruments — via TWIN" :
     currentRole==="pha" ? "Inbound queue, Southampton BCP — via TWIN" :
